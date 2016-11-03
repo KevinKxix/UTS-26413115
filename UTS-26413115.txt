@@ -1,0 +1,28 @@
+1.)
+
+wget http://api.worldbank.org/v2/en/indicator/SI.POV.GINI?downloadformat=csv
+
+sudo apt-get install unzip
+
+unzip API_SI.POV.GINI_DS2_en_csv_v2.zip -d Documents
+
+$ sed -e '/^$/d' API_SI.POV.GINI_DS2_en_csv_v2.csv > data.txt
+
+#! /usr/bin/env Rscript
+d<-scan("data.txt", quiet=TRUE)
+cat(min(d), max(d), mean(d), sep="\n")
+
+-----------------------------------------------------------------------------
+
+2.)
+
+Method			: Post
+Form Nama Provinsi	: selprop
+Form Laporan		: selrepo
+Form Periode (Bulan)	: selbul
+Form Periode (Tahun)	: seltah
+
+-$ curl -d "selprop=35" -d "selrepo=lhk03prov" -d "selbul=10" -d "seltah=16" -d "button=Lanjut%"JavaScript:goReport(this.form.selrepo);" https://aplikasi.pertanian.go.id/smshargakab/qrylapharprov.asp > data.txt
+
+
+sort -n -r data.txt
